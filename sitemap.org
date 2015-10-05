@@ -1,5 +1,5 @@
-#+TITLE: Tech
+#+TITLE: RD works
 
    + [[file:theindex.org][Index]]
-   + [[file:objc-methods.org][Methods]]
+   + [[file:objc-methods.org][Objective C Methods]]
    + [[file:cprog.org][cprog]]
