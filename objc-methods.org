@@ -1,4 +1,4 @@
-#+title: Methods
+#+title: Objective C Methods
 #+index: objc!methods
 
 
@@ -65,10 +65,25 @@ Third line of the sample code calls the *init* method of our now allocated objec
 
 * Arguments
 
-When you want methods to take on some arguments or parameters, here's the syntax on how to do it.
+When you want methods to take on some arguments or parameters, here's the syntax on how to do it
 
+#+begin_example
+-(void) talk: (NSString*) args;
+#+end_example
 
+By now you would have noticed that a pair of parens is not part of a method signature in Objective-C, and simply putting the arguments inside the pair of parens is not the way to write a method that accepts arguments.
 
+When a method must take one argument, a colon is appended to right of the method name. The type of the argument is then written next. The argument type is enclosed in parens. Afterwhich, the name of the argument is written last. 
+
+#+begin_example
+-(void) foo;
+-(void) goo: (int) args;
+-(void) boo: (float) args;
+-(void) coo: (BOOL) args;
+-(void) doo: (NSString*) args;
+#+end_example
+
+Code snippet above shows how to declare methods that take on a single argument. Going back to our *Person* class example, if we were to accept an argument on the *talk* method, here's how it will be written and called.
 
 #+begin_example
 @interface Person : NSObject
@@ -95,6 +110,38 @@ int main(int argc, const char *argv[]) {
 #+end_example
 
 
-
 * Multiple arguments 
+
+Writing a method that takes on multiple arguments is one of the things that weirds out a newcomer to Objective-C. Each argument actually needs to be written out with it's own method signature. Take a look at a sample method name in the snippet below
+
+#+begin_example
+-(void) boo: (int) a Coo:(int) b Doo:(int) c;
+#+end_example
+
+The full name of the method is *booCooDoo*. The method takes on 3 arguments, each is prepended a small part of the method name. 
+
+This might seem weird at first, but it is actually expressive and verbose. One of the downsides of this kind of mechanism for writing methods is that you can easily write methods with very long names; and Objective-C is notorious for this.
+
+Here's the complete snippet for *booCooDoo*
+
+#+begin_example
+#import <Foundation/Foundation.h>
+
+@interface Obj : NSObject
+-(void) boo: (int) a Coo:(int) b Doo:(int) c;
+@end 
+
+@implementation Obj
+-(void) boo:(int) a Coo:(int) b Doo:(int) c {
+  NSLog(@"The params are %i, %i and %i", a,b,c);
+}
+@end
+
+int main(int argc, const char *argv[]){
+  @autoreleasepool {
+    [[Obj new] boo: 1 Coo:2 Doo:3];
+  }
+}
+#+end_example
+
 
