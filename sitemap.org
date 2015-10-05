@@ -1,0 +1,5 @@
+#+TITLE: Tech
+
+   + [[file:theindex.org][Index]]
+   + [[file:objc-methods.org][Methods]]
+   + [[file:cprog.org][cprog]]
