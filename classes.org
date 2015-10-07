@@ -1,0 +1,30 @@
+#+title: Classes
+#+index: objc!classes
+
+* Parts of a class 
+
+There is actually no *class* keyword in Objective C, oddly enough. Classes are constructed using two files, an interface file and an implementation file. The interface file contains method signatures, property declarations and instance variables or /ivars/. The implementation file contains the actual implementation of the method signatures declared in the corresponding interface file.  
+
+#+begin_example
+@interface Person : NSObject {
+  NSString *lastname;
+  NSString *firstname;
+}
+-(void) talk;
+@
+#+end_example
+
+
+
+
+* Instance variables
+
+
+* Super class
+
+
+* Inheritance
+
+
+* Polymorphism
+

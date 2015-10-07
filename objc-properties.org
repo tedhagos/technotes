@@ -1,0 +1,139 @@
+#+title: Properties
+#+index: objc!properties
+
+
+One the basic and common tasks in any object oriented language is the creation of value objects. C# programmers call this POCOS and Java programmers refer to these value objects as POJOS, plain ole C# objects and plain ole Java objects respectively. 
+
+There are a couple of ways to construct value objects in Objective-C. Some of these ways are frowned upon and highly discouraged, some have become mainstream practice like the use of @properties and some are pretty much the run-off-the-mill getters and setters. Will take a look at some examples on how to do each of them
+
+
+* Direct manipulation of public ivars
+
+I don't have to tell you that this is the bad practice and quite frowned upon. It violates the principles of encapsulation which in turn violates the principles of cohesion and coupling. The less internal state an object exposes to the world around it, the better. But anyway, here's how the code will look like
+
+
+#+begin_example
+#import <Foundation/Foundation.h>
+
+@interface Person : NSObject{
+  @public NSString *lastname;
+  @public NSString *firstname;
+}
+@end
+
+@implementation Person
+@end
+
+/// main
+int main(int argc, const char *argv []){
+  Person *p = [Person new];
+  p->firstname = @"Ted";
+  p->lastname = @"Hagos";
+  NSLog(@" Name is %@ , %@", p->lastname, p->firstname);
+}
+#+end_example
+
+Objective-C being a superset of the C language, you can pretty much access the members of an object using the arrow operator (p is a pointer to the Person object, remember?). Now that you've seen how to do it, try your best to forget about this. This example was coded purely for reference purposes only.
+
+As a side note, the ivars lastname and firstname were defined as @public because by default, when ivars are defined on an interface file, the default access modifier is @protected, which means it is only reachable or accessible from either the class that defined its subclasses. Will discuss more about access modifiers
+
+* Straight up Getters and Setters
+
+The most common way of coding value objects is of course, creating methods within the class to manipulate its internal ivars.
+
+#+begin_example
+@interface Person : NSObject
+-(void) setLastname:(NSString*) arg;
+-(void) setFirstname: (NSString*) arg;
+-(NSString*) lastname;
+-(NSString*) firstname;
+@end
+#+end_example
+
+On the interface file of the Person class, I only defined a pair of methods that sets and gets the lastname/firstname. Notice that the interface file does not contain any definition of the ivars; if ivars are going to be private anyway, they are better written out on the implementation file, not the interface. 
+
+Now, the implementation file
+
+#+begin_example
+@implementation Person{
+  @private NSString *lastname;
+  @private NSString *firstname;
+}
+-(void) setLastname:(NSString*) arg{lastname = arg;}
+-(void) setFirstname: (NSString*) arg {firstname = arg;}
+-(NSString*) lastname {return lastname;}
+-(NSString*) firstname {return firstname;}
+@end
+#+end_example
+
+No surprises here, they are basically just setting and getting the lastname and firstname private variables of Person object. You may have noticed that the name of the getter method is the same as the name of ivar. This is not required but it is quite idiomatic to do this in Objective-C. Don't worry that the runtime will be confused because we used the same name in the ivar and method, it is smart enough to tell the difference. 
+
+
+The next code snippet shows the main function which sets and gets the members of the value object. 
+
+#+begin_example
+int main(int argc, const char *argv []){
+  Person *p = [Person new];
+  [p setFirstname:@"Ted"];
+  [p setLastname: @"Hagos"];
+  NSLog(@" Name is %@ , %@", [p lastname], [p firstname]);
+}
+#+end_example
+
+There is nothing wrong coding value objects this way, except that Objective-C has a more idiomatic way of creating value objects using *properties*
+
+* Properties
+
+Objective C has language level support for creating value objectst. Instead of manually creating accessor methods, we can declare ivars as properties and even synthesize, that means generate, accessor methods for these ivars.
+
+Let's rewrite the Person value object again. We will start by defining lastname and first as properties on the interface file. We don't have to write anything on the implementation file, but we still have to provide it even if it is empty
+
+#+begin_example
+#import <Foundation/Foundation.h>
+
+@interface Person : NSObject
+@property NSString *lastname, *firstname;
+@end
+
+@implementation Person
+@end
+
+#+end_example
+
+In older versions of XCode (and the clang compiler that came with it), we actually had to write a *@synthesize* statement on the implementation file, like this
+
+#+begin_example
+@implementation Person
+@synthesize lastname, firstname
+@end
+#+end_example
+
+But now, if you are using XCode version 4 or higher, we don't have to write the synthesize statement anymore. The compiler is smart enough to figure out that we would like to generate or synthesize accessor methods for our properties. In order to use our value object, we can write the following code inside the main function
+
+#+begin_example
+int main(int argc, const char *argv[]){
+  @autoreleasepool {
+    Person *p = [Person new];
+    [p setLastname: @"Doe"];
+    [p setFirstname: @"John"];
+    NSLog(@"The name is %@, %@", [p lastname], [p firstname]);
+  }
+  return 0;
+}
+#+end_example
+
+The compiler automatically synthesized accessor methods for the properties we declared. Notice the convention it is using when generating the accessors. For the getter accessor, the method name it will synthesize is exactly the same name as the declared property; remember earlier that I said that practice is quite idiomatic in Objective-C, even the synthesizers are following that. As for the setter accessor, the method name will be **set** + **name of property** and it will be camel-cased or snake-cased, the first letter of the property name will be the only one capitalized.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

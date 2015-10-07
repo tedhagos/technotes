@@ -1,4 +1,4 @@
-#+title: Objective C Methods
+#+title: Methods
 #+index: objc!methods
 
 
@@ -111,6 +111,7 @@ int main(int argc, const char *argv[]) {
 
 
 * Multiple arguments 
+
 
 Writing a method that takes on multiple arguments is one of the things that weirds out a newcomer to Objective-C. Each argument actually needs to be written out with it's own method signature. Take a look at a sample method name in the snippet below
 
