@@ -1,4 +1,6 @@
 
+body {color: #000;}
+
 .title {
 	text-align: left;
 	font-size: 4em;
@@ -11,15 +13,20 @@
 }
 
 pre {
-	font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+	font-family: 'Monaco', 'Menlo', 'Consolas','Lucida Console', monospace;
 	color: #000067;
 	font-size: .85em;
+}
+code {
+	font-size: .9em; color: #000;
+	font-family: 'Lucida Console', monospace;
+	font-weight: bold;
 }
 
 #table-of-contents {
 	display: inline-block;
 	padding: 10px 30px;
-	background: #cbcdff;
+	background: #dfe0ff;
 }
 #table-of-contents h2 {
 	font-weight:normal;
@@ -27,11 +34,13 @@ pre {
 
 #text-table-of-contents ul {
 	list-style-type: none;
+	padding-left: 6px;
+	line-height: 1.3em;
+/*
 	padding:0;
 	margin:0;
+*/
 }
-#text-table-of-contents ul a {text-decoration: none; color:blue;}
-#text-table-of-contents ul a:hover {
-	color: #000;
-	text-decoration: underline;
-}
+
+#text-table-of-contents ul a {text-decoration: none; color:#222;}
+#text-table-of-contents ul a:hover {text-decoration: underline;}

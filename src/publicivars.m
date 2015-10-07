@@ -13,7 +13,12 @@ I gotta know how to do it, just to demonstrate the point
 }
 @end
 
-@implementation Person
+@implementation Person {
+-(void) foo {
+  int y;
+  NSLog(@"%d", y);
+}
+
 @end
 
 /// main
@@ -22,4 +27,6 @@ int main(int argc, const char *argv []){
   p->firstname = @"Ted";
   p->lastname = @"Hagos";
   NSLog(@" Name is %@ , %@", p->lastname, p->firstname);
+  NSLog(@"%i", p->i);
+  NSLog(@"%i", p->x);
 }
