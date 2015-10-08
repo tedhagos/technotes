@@ -85,13 +85,31 @@ int main(int argc, const char *argv []){
 
 * Inheritance 
 
-Objective C follows a single rooted class inheritance mechanism. You cannot inherit from more than one superclass. 
+Objective C follows a single rooted class inheritance mechanism. You cannot inherit from more than one superclass. The basic syntax for extending a class is as follows
 
-What you do inherit, protected/public variables and ivars only
+#+begin_example
+@interface Person : NSObject {
+  NSString *lastname;
+  NSString *firstname;
 
+  @private NSString *foo;
+}
 
+-(void) talk;
+-(void) walk;
+@end
 
-Protocols, interface inheritance
+@interface Employee : Person
+@end
+
+#+end_example
+
+To inherit from an existing class, use a colon to signify class extension followed by the name of an existing class, this will in turn become your super or base class. 
+
+The subclass or the child class inherits the following things:
+
+1. All variables and methods that are public, which means all methods that are declared on the header file. The implicit and *only* access modifier for a method on a header file is *public*
+2. All variables that are declared ~@protected~ in the superclass. When an ivar is defined on the header without any access modifier, it implicitly has protected access. Which means is only reachable from within the class that defined it and its subclasses. Variables with protected access are not reachable outside the class
 
 
 * Instance variables
@@ -143,7 +161,9 @@ int main(int argc, const char *argv[]) {
 }
 #+end_example
 
-The code above will fail compilation. The compiler will immediately see that that ~platenumber~ ivar defined in the /Vehicle/ class is private in scope (because it is defined in the implementation file without a qualifying access modifier)
+The code above will fail compilation. The compiler will immediately see that that ~platenumber~ ivar defined in the /Vehicle/ class is private in scope (because it is defined in the implementation file without a qualifying access modifier). 
+
+The corrected version of the code sample above will not be given but instead left for reader as an exercise. Refactor the code so that ~platenumber~ ivar is inherited by the Car subclass.  
 
 
 interface - protected
@@ -151,8 +171,34 @@ implementation - private
 
 public
 
+
 * Methods
 
+You can find declarations of method in either or both the header and implementation files.
+
+** Public Methods
+
+When a method is declared on the header, it needs to have a corresponding definition on the implementation file
+
+#+begin_example
+@interface Person : NSObject
+-(void) walk;
+@end
+
+@implementation Person 
+-(void) walk {
+  NSLog(@"Person walking");
+}
+@end
+#+end_example
+
+The header files is supposed to contain only the declaration of methods. That means the only thing that can follow the method name is a semicolon, that makes it abstract. The method definition on the implementation file replaces the semicolon with a pair curly braces. The block constitutes the definition of the method, which makes the method concrete and not abstract anymore.
+
+Methods that are declared on the header file are public methods. You cannot specify them otherwise. These are all the methods that are callable from outside the class. They will constitute the type of the object.
+
+** Private Methods
+
+When methods are declared and defined just on the implementation file, they become private methods. 
 
 * Super class
 
