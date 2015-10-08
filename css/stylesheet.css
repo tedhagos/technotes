@@ -1,6 +1,9 @@
 
 body {color: #000;}
 
+a {color: #8b0000; text-decoration:none;}
+a:hover {text-decoration:underline;}
+
 .title {
 	text-align: left;
 	font-size: 4em;
@@ -11,10 +14,26 @@ body {color: #000;}
 	font-family: 'Georgia',serif;
 	font-weight: normal;
 }
-
+/*
 pre {
+  border: 1px solid #ccc;
+  box-shadow: 3px 3px 3px #eee;
+  padding: 8pt;
+  font-family: monospace;
+  overflow: auto;
+  margin: 1.2em;
+}
+pre.src {
+  position: relative;
+  overflow: visible;
+  padding-top: 1.2em;
+}
+*/
+pre {
+	border: 0;
+	box-shadow: none;
 	font-family: 'Monaco', 'Menlo', 'Consolas','Lucida Console', monospace;
-	color: #000067;
+	color: #00468b;
 	font-size: .85em;
 }
 code {

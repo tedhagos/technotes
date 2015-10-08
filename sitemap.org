@@ -1,6 +1,6 @@
 #+TITLE: RD works
 
-   + [[file:classes.org][Classes]]
+   + [[file:objc-classes.org][Classes]]
    + [[file:theindex.org][Index]]
    + [[file:objc-methods.org][Methods]]
    + [[file:objc-properties.org][Properties]]

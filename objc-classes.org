@@ -1,6 +1,9 @@
 #+title: Classes
 #+index: objc!classes
 
+Objective C adds language level support to the C language in order for us to do object oriented programming. While the syntax is straightforward, it may take a bit of getting used to if you are coming from other OO languages like Java or C#. 
+
+
 * Parts of a class 
 
 There is actually no *class* keyword in Objective C, oddly enough. Classes are constructed using two files, an interface file and an implementation file. The interface file contains method signatures, property declarations and instance variables or /ivars/. The implementation file contains the actual implementation of the method signatures declared in the corresponding interface file.  
@@ -93,7 +96,7 @@ Protocols, interface inheritance
 
 * Instance variables
 
-Instance variables or /ivars/ can be declared either on header or implementation file. When ivars are defined on the header, they are implicitly ~@protected~. And when they are defined on implementation file, they are implicitly ~@private~. 
+Instance variables or /ivars/ can be declared either on the header or the  implementation file. When ivars are defined on the header, they are implicitly ~@protected~. And when they are defined on implementation file, they are implicitly ~@private~. 
 
 #+begin_example
 #import <Foundation/Foundation.h>
@@ -139,6 +142,8 @@ int main(int argc, const char *argv[]) {
   return 0;
 }
 #+end_example
+
+The code above will fail compilation. The compiler will immediately see that that ~platenumber~ ivar defined in the /Vehicle/ class is private in scope (because it is defined in the implementation file without a qualifying access modifier)
 
 
 interface - protected
