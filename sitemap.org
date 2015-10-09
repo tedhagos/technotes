@@ -1,6 +1,7 @@
-#+TITLE: RD works
+#+TITLE: Tech
 
    + [[file:objc-classes.org][Classes]]
    + [[file:theindex.org][Index]]
    + [[file:objc-methods.org][Methods]]
+   + [[file:objc-strings.org][NSString]]
    + [[file:objc-properties.org][Properties]]

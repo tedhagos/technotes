@@ -176,7 +176,12 @@ public
 
 You can find declarations of method in either or both the header and implementation files.
 
-** Public Methods
+Methods are usually declared on the header file, the interface part that is. This declaration only contains the following
+
+1. *Method type*. Whether the method belongs to the object or its class. A minus sign means it is an instance method and plus sign means it belongs to to class
+2. *Return type*. This could be either a primitive type or a reference type
+3. *Method name*
+4. *Method arguments*. If there are any
 
 When a method is declared on the header, it needs to have a corresponding definition on the implementation file
 
@@ -194,13 +199,11 @@ When a method is declared on the header, it needs to have a corresponding defini
 
 The header files is supposed to contain only the declaration of methods. That means the only thing that can follow the method name is a semicolon, that makes it abstract. The method definition on the implementation file replaces the semicolon with a pair curly braces. The block constitutes the definition of the method, which makes the method concrete and not abstract anymore.
 
-Methods that are declared on the header file are public methods. You cannot specify them otherwise. These are all the methods that are callable from outside the class. They will constitute the type of the object.
+Declaring methods on the interface file is known as /forward declaration/ and is quite idiomatic of C/C++ practice. Starting with XCode 4 (and the associated *clang* compilers), forward declarations seemed to have mattered less. So the compiler will let you get away with methods that are written only on the implementation file. It is still encouraged though to follow the practice of providing forward declarations. 
 
-** Private Methods
+* Creating objects and Method invocations
 
-When methods are declared and defined just on the implementation file, they become private methods. 
-
-* Super class
+Objects 
 
 
 * Inheritance

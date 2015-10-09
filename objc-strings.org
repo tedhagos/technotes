@@ -1,0 +1,79 @@
+#+title: NSString
+#+index: objc!strings
+
+You can still use C style strings inf you program if you like, but that will not be very useful especially when you start working with other classes in the Foundation and Cocoa APIs because most of them require objects. C style strings are not objects, they are just an array of characters.
+
+Strings are very common when writing useful programs, that is why there is a Foundation class for it. The ~NSString~. 
+
+* Creating
+
+NSString is an object, so you can pretty much create them like any other object
+
+#+begin_example
+NSString *string = [[NSString alloc] init];
+#+end_example
+
+But this is not a terribly useful thing to do because string objectss are *immutable*. An immutable object is one which when you create them, you can no longer modify its contents. So the code above created an empty string that you can no longer update. You won't be using that kind of code.
+
+The most common way to create a string object is to use the string literal
+
+#+begin_example
+NSString *string = @"Hello World";
+#+end_example
+
+The string literal pretty much looks like a C style string but with an @sign before it. The @ sign is compiler directive which tells it that we are dealing with an Objective C type, not a C style string. And because NSString are objects, we can send it messages.
+
+#+begin_example
+[@"The quick brown fox" length];
+
+NSString *string = @"Hello World";
+NSLog(@"The length of the string is %@", [string length]);
+#+end_example
+
+There are other ways to create a string object, you can create them by reading them from a file on disk or a network socket. But we won't look at them right now. 
+
+* Working with Strings
+
+Some of the things we can do with Strings are the following
+
+#+begin_example
+NSString *s = @"My String";
+
+NSLog(s);
+s = [s uppercaseString];
+NSLog(s);
+s = [s lowercaseString];
+NSLog(s);
+s = [s capitalizedString];
+NSLog(s);
+#+end_example
+
+These are pretty straightforward methods, they transform the string into something else. But note that none of methods we called above modified the original string object. The methods uppercase, lowercase and capitalized that we called all resulted in the creation of a new string object. We simply reused the reference variable everytime we transformed the original string. 
+
+* Comparing
+
+Comparing strings cannot be performed using the equivalence operators. We cannot compare strings the way we would compare two integers.
+
+#+begin_example
+NSString *a = @"Hello";
+NSString *b = @"Hello";
+if (a == b) {
+  // Do Something
+}
+#+end_example
+
+The code above will not work as expected. It will compile, sure, but what you would be comparing are memory addresses of variables a and by, not their string contents. The proper way to compare strings for equivalence is shown in the following code
+
+#+begin_example
+if ([a isEqualTo: b]){
+  NSLog(@"Strings match");
+}
+#+end_example
+
+The ~isEqualTo~ method of the NSString performs the necessary comparisson between the two strings and returns true if the strings are identical in contents. It returns false otherwise.
+
+* Searching Strings
+
+* Adding Strings
+
+
