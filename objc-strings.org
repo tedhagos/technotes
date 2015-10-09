@@ -74,6 +74,76 @@ The ~isEqualTo~ method of the NSString performs the necessary comparisson betwee
 
 * Searching Strings
 
+When you need to find out if a specific string is within another string, you can use the ~rangeOfString~ method
+
+#+begin_example
+NSString *origstring = @"The quick brown fox jumped";
+
+NSString *search = "brown fox";
+NSRange range = [origstring rangeOfString:search];
+if (range.location == NSNotFound) {
+  // search is not within originstring
+}
+else {
+  // found it
+}
+#+end_example
+
+~NSRange~ is not an object, it is a struct that is why we did not have to use the pointer operator for its variable. The rangeOfString method of the NSString returns an NSRange structure. NSNotFound is one the constants defined in the Foundation toolkit. 
+
+If you need to perform an case insensitive search for strings, use the following code
+
+#+begin_example
+NSRange range = [origstring rangeOfString : search
+                 options:NSCaseInsensitiveSearch]
+#+end_example
+
+The ~NSCaseInsensitiveSearch~ is just one of the options you can pass on ~rangeOfString~ method.
+
 * Adding Strings
 
+This is tricky and probably frustrating if you are coming from a more modern language like Java or C# because concatenating strings in Objective C is not as simple as ~string1 + ~string2~. 
 
+#+begin_example
+NSString *a = @"Hello ";
+NSString *b = @"World";
+
+NSString *c = a + b;
+#+end_example
+
+The third line of code above is illegal to do in Objective C. You cannot add strings this way. You could add the strings a and b with 
+
+#+begin_example
+NSString *c = [a stringByAppendingString: b];
+#+end_example
+
+or using this code
+
+#+begin_example
+NSString *c = [NSString stringWithFormat: @"%C %C", a,b];
+#+end_example
+
+** NSMutableString
+
+When you need a quick way to add strings, using the stringByAppendingString or the stringWithFormat method may suffice. But these are less than ideal if you need to concatenate a lot of strings. Recall that NSString is an immutable object. Everytime you append a string, you are creating a new object, and that is expensive. It will hurt the performance of the application. 
+
+Another way to concat strings is to use the mutable version of NSString. 
+
+#+begin_example
+NSMutableString *c = [NSMutableString stringWithString: a];
+[c appendString:b];
+#+end_example
+
+
+* Working with AlphaNumeric numbers
+
+There maybe times when you need to extract numeric values from strings, e.g. if you read the string from a configuration file and you need to work with the values inside the file. 
+
+#+begin_example
+NSString *a = @"1";
+NSString *b = @"2.0";
+
+int i = [a intValue];
+float f = [b floatValue];
+
+#+end_example
