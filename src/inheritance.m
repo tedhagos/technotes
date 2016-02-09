@@ -1,14 +1,14 @@
 #import <Foundation/Foundation.h>
 
 // class Vehicle ------------------------------
-@interface Vehicle : NSObject {
-  NSString *platenumber;
-} 
+@interface Vehicle : NSObject 
 -(NSString*) platenumber;
 -(void) setPlatenumber: (NSString*) args;
 @end
 
-@implementation Vehicle 
+@implementation Vehicle {
+  NSString *platenumber;
+} 
 -(NSString*) platenumber {
   return platenumber;
 }
@@ -32,6 +32,7 @@
   return platenumber;
 }
 @end
+
 
 // class What ----------------------------------
 
